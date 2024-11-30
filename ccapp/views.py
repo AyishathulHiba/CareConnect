@@ -378,3 +378,5 @@ def physiotherapy_doctors_view(request):
 def phsycology_doctors_view(request):
     return render (request, 'phsycology_doctors.html')
 
+# def phsycology_doctors_view(request):
+#     return render (request, 'phsycology_doctors.html')
