@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Define your CSS variables */
+        :root {
+            --primary: #1B2C51;
+            --light: #EFF5FF;
+            --dark: #1B2C51;
+        }
+
+        body { 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--light); /* Using --light for background */
+        }
+
+        .navbar {
+            background-color: var(--primary); /* Using --primary for navbar */
+            color: white;
+            height: 55px; /* Explicitly setting the height */
+            line-height: 55px; /* Vertically center the text */
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            padding-left: 15px; /* Added some padding to the left of the text */
+            font-size: 18px; /* Reduced font size to fit in the smaller navbar */
+            float: left; /* Aligns the title to the left */
+        }
+
+        .nav-links {
+            float: right;
+            padding-right: 15px; /* Added padding to the right for spacing */
+        }
+
+        .logout-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: var(--dark);
+        }
+
+        .sidebar {
+            background-color: var(--dark); /* Using --dark for the sidebar */
+            color: white;
+            width: 200px;
+            height: calc(100vh - 55px); /* Sidebar height adjusted to match new navbar height */
+            position: relative;
+            padding-top: 20px;
+            float: left;
+            text-align: center;
+        }
+
+        .profile-container {
+            margin: 80px 0;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none; /* No underline */
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            margin-top: 40px; /* Adjusted to match the navbar height */
+        }
+
+        h2 {
+            color: var(--dark); /* Using --dark for heading text */
+        }
+
+        .container-boxes {
+            display: flex;
+            justify-content: space-between; /* Distributes boxes evenly */
+            margin-top: 20px; /* Space above the boxes */
+        }
+
+        .box {
+            background-color: var(--dark); /* Background color for the boxes */
+            color: white; /* Changed text color to white */
+            width: 30%; /* Adjust width as needed */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(232, 223, 223, 0.3);
+            text-align: center; /* Center-align text */
+            margin: 0 10px; /* Space between boxes */
+            transition: transform 0.2s;
+        }
+
+        .box:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .box a {
+            color: white; /* Text color for links */
+            text-decoration: none; /* No underline for links */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Admin Dashboard</h1>
+        <div class="nav-links">
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <center>
+            <div class="profile-container">
+                <img src="{% static 'img/pp.jpg' %}" class="profile-pic" alt="Profile Picture">
+            </div>
+            <h6 style="color:rgba(0, 0, 0, 0.3);"></h6>
+        </center>
+
+        <ul>
+            <li><a href="{% url 'admin-dashboard' %}">Admin</a></li>
+            <li><a href="{% url 'admindoctor-dashboard' %}">Doctor</a></li>
+            <li><a href="{% url 'adminpatient-dashboard' %}">Patient</a></li>
+            <li><a href="{% url 'adminpharmacy-dashboard' %}">Pharmacy</a></li>
+            <li><a href="{% url 'admin-booking' %}">Booking</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to the Admin Dashboard</h2>
+        <p>Your content goes here...</p>
+        <br>
+
+        <div class="container-boxes">
+            <div class="box add-box">
+                <h3><a href="{% url 'adminpatientadd-dashboard' %}">Add</a></h3>
+            </div>
+            <div class="box view-box">
+                <h3><a href="{% url 'adminpatientview-dashboard' %}">View</a></h3>
+            </div>
+            <div class="box request-box">
+                <h3><a href="{% url 'adminpatientrequest-dashboard' %}">Request</a></h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            // Logic for logging out, e.g., redirecting to a logout URL
+            window.location.href = '/logout/'; // Adjust the URL as needed
+        }
+    </script>
+</body>
+</html>

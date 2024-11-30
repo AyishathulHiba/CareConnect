@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <style>
+        :root {
+            --primary: #0463FA;
+            --light: #7BB3E5; /* Adjusted to a darker shade */
+            --text-color: #333;
+            --error-color: #ff4d4d;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--light) 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0350C1;
+            transform: scale(1.05);
+        }
+
+        .alert {
+            background-color: var(--error-color);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Center button container */
+        .button-container {
+            margin-top: 15px;
+        }
+
+        /* Style for login button to look like a box */
+        .btn-login {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: #0350C1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+
+        {% if error %}
+        <div class="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'adminclick' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+            </div>
+           
+            <div class="button-container"></div>
+                <a href="{% url 'admin-dashboard' %}" class="button">Login</a>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+{% load widget_tweaks %}
+{% extends 'admin-dashboard.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+
+{% block content %}
+<div class="container register-form">
+    <h2>Doctor Registration</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-content">
+            <div class="row">
+                <div class="form-group">
+                    {% render_field userform.first_name class="form-control" placeholder="First Name" %}
+                </div>
+                <div class="form-group">
+                    {% render_field userform.last_name class="form-control" placeholder="Last Name" %}
+                </div>
+                <div class="form-group">
+                    {% render_field userform.username class="form-control" placeholder="User Name" %}
+                </div>
+                <div class="form-group">
+                    {% render_field userform.password class="form-control" placeholder="Password" %}
+                </div>
+                <div class="form-group">
+                    {% render_field doctorform.mobile class="form-control" placeholder="Mobile" %}
+                </div>
+                <div class="form-group">
+                    {% render_field doctorform.year_of_experience class="form-control" placeholder="Years of Experience" %}
+                </div>
+                <div class="form-group">
+                    {% render_field doctorform.email class="form-control" placeholder="Email" %}
+                </div>
+                <div class="form-group">
+                    {% render_field doctorform.department class="form-control" placeholder="Department" %}
+                </div>
+
+                <!-- Gender Radio Buttons -->
+                <div class="form-group radio-group">
+                    <label>Gender:</label>
+                    <label>
+                        <input type="radio" name="gender" value="Male"> Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female"> Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Other"> Other
+                    </label>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="medical_license">Add your medical license</label>
+                    {% render_field doctorform.medical_license required="required" class="form-control" placeholder="Medical License" %}
+                </div>
+
+                <div class="form-group">
+                    <label for="profile_pic">Add your profile picture</label>
+                    {% render_field doctorform.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
+                </div>
+
+                <br>
+
+                <button type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Define your CSS variables */
+        :root {
+            --primary: #1B2C51;
+            --light: #EFF5FF;
+            --dark: #1B2C51;
+            --card-bg: #001f4d; /* Dark blue color */
+            --card-border: #001f4d; /* Matching border for the dark blue container */
+            --text-light: #FFFFFF; /* White text for contrast */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--light);
+        }
+
+        .navbar {
+            background-color: var(--primary);
+            color: white;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            padding-left: 15px;
+            font-size: 18px;
+            float: left;
+        }
+
+        .nav-links {
+            float: right;
+            padding-right: 15px;
+        }
+
+        .logout-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: var(--dark);
+        }
+
+        .sidebar {
+            background-color: var(--dark);
+            color: white;
+            width: 200px;
+            height: calc(100vh - 55px);
+            position: relative;
+            padding-top: 20px;
+            float: left;
+            text-align: center;
+        }
+
+        .profile-container {
+            margin: 80px 0;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        h2 {
+            color: var(--dark);
+        }
+
+        /* Flexbox container styles */
+        .dashboard-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* Individual card styles */
+        .dashboard-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-light); /* White text for better readability */
+            text-decoration: none; /* Remove underline for links */
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-light); /* White heading color */
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Admin Dashboard</h1>
+        <div class="nav-links">
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <center>
+            <div class="profile-container">
+                <img src="{% static 'img/pp.jpg' %}" class="profile-pic" alt="Profile Picture">
+            </div>
+            <h6 style="color:rgb(7, 94, 201);"></h6>
+        </center>
+
+        <ul>
+            <li><a href="{% url 'admin-dashboard' %}">Admin</a></li>
+            <li><a href="{% url 'admindoctor-dashboard' %}">Doctor</a></li>
+            <li><a href="{% url 'adminpatient-dashboard' %}">Patient</a></li>
+            <li><a href="{% url 'adminpharmacy-dashboard' %}">Pharmacy</a></li>
+            <li><a href="{% url 'admin-booking' %}">Booking</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to the Admin Dashboard</h2>
+        <div class="dashboard-container">
+            <!-- Container Box 1: Add -->
+            <a href="{% url 'admin-add-booking' %}" class="dashboard-card">
+                <h3>Add</h3>
+                <p>Click here to add new appointments.</p>
+            </a>
+            
+            <!-- Container Box 2: View -->
+            <a href="{% url 'admin-view-booking' %}" class="dashboard-card">
+                <h3>View</h3>
+                <p>View existing appointments.</p>
+            </a>
+            
+            <!-- Container Box 3: Approve -->
+            <a href="{% url 'admin-approve-booking' %}" class="dashboard-card">
+                <h3>Approve</h3>
+                <p>Approve or reject pending appointments.</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            // Logic for logging out, e.g., redirecting to a logout URL
+            window.location.href = '/logout/'; // Adjust the URL as needed
+        }
+    </script>
+</body>
+</html>

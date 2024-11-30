@@ -1,0 +1,135 @@
+{% extends 'admin-dashboard.html' %}
+
+{% block title %}Doctor View Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --light: #EFF5FF;
+        --dark: #1B2C51;
+        --background: #F7F8FA;
+        --text-light: #FFFFFF;
+        --text-dark: #333333;
+        --accent: #00D4FF; /* Define accent color */
+    }
+
+    .doctor-view-dashboard {
+        background-color: var(--background);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-title {
+        color: var(--dark);
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .doctor-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--text-light);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table-header th {
+        background-color: var(--dark);
+        color: var(--text-light);
+        padding: 10px 10px;
+        text-align: left;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+
+    .table-body td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        color: var(--text-dark);
+        font-size: 15px;
+    }
+
+    .download-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 8px 12px;
+        background-color: var(--dark);
+        color: var(--text-light);
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .download-link:hover {
+        background-color: var(--accent);
+        color: var(--text-light);
+        text-decoration: none;
+    }
+
+    .no-data {
+        text-align: center;
+        font-size: 18px;
+        color: var(--accent);
+        font-weight: bold;
+        padding: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+        .doctor-table {
+            font-size: 13px;
+        }
+
+        .dashboard-title {
+            font-size: 22px;
+        }
+
+        .table-header th,
+        .table-body td {
+            padding: 10px;
+        }
+    }
+</style>
+
+<div class="container doctor-view-dashboard">
+    <h2 class="dashboard-title">Registered Doctors</h2>
+    <table class="table table-striped doctor-table">
+        <thead class="table-header">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Department</th>
+                <th>Medical License</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            {% if doctors %}
+                {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.user.username }}</td>
+                        <td>{{ doctor.email }}</td>
+                        <td>{{ doctor.mobile }}</td>
+                        <td>{{ doctor.get_department_display }}</td>
+                        <td>
+                            {% if doctor.medical_license %}
+                                <a href="{{ doctor.medical_license.url }}" target="_blank" class="download-link">Download</a>
+                            {% else %}
+                                No License
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="no-data">No Doctors Registered</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
