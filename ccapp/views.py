@@ -292,9 +292,6 @@ def patient_prescriptionview(request):
 def patient_purchasingview(request):
     return render(request, "patient-purchasing.html")
 
-def view_doctorsview(request):
-    department=models.Department.objects.all()
-    return render(request, "view-doctors.html" , {"context":department})
 
 def book_appointmentview(request):
     appointmentform=forms.AppointmentForm()
@@ -302,7 +299,9 @@ def book_appointmentview(request):
     message=None
     mydict={'appointmentform': appointmentform, 'patient':patient, 'message': message} 
     if request.method== 'POST' :
-        appointmentForm=forms.AppointmentForm(request.POST)
+        appointmentform=forms.AppointmentForm(request.POST)
+        print (request.POST)
+        print (request.user.id)
         if appointmentform.is_valid():
             print (request. POST.get('doctorId')) 
             desc=request. POST. get ('description')
@@ -314,11 +313,14 @@ def book_appointmentview(request):
             appointment.patientName=request.user.first_name
             appointment.status=False
             appointment.save()
+        else:
+            print (appointmentform.errors)
         return HttpResponseRedirect( 'view-appointment' )
     return render(request, "book-appointment.html",context=mydict)
 
 def view_appointmentview(request):
-    return render(request, "view-appointment.html")
+    appointments = models.Appointment.objects.filter(patientId=request.user.id)
+    return render(request, "view-appointment.html",{"appointments": appointments})
 
 def doctor_bookingview(request):
     return render(request, "doctor-booking.html")
@@ -377,6 +379,3 @@ def physiotherapy_doctors_view(request):
     return render (request, 'physiotherapy_doctors.html')
 def phsycology_doctors_view(request):
     return render (request, 'phsycology_doctors.html')
-
-# def phsycology_doctors_view(request):
-#     return render (request, 'phsycology_doctors.html')

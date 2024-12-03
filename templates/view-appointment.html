@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .card .date {
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Appointments</h1>
+    <div class="container">
+        {% for item in appointments %}
+        <div class="card">
+            <h3>{{item.doctorName}}</h3>
+            <p>{{item.description}}</p>
+            <!-- <p class="date">Date: 2024-12-05</p> -->
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

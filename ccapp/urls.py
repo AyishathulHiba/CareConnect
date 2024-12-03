@@ -42,7 +42,6 @@ urlpatterns = [
     path('patient-consultation/', views.patient_consultationview, name="patient-consultation"),
     path('patient-prescription/', views.patient_prescriptionview, name="patient-prescription"),
     path('patient-purchasing/', views.patient_purchasingview, name="patient-purchasing"),
-    path('view-doctors/', views.view_doctorsview, name="view-doctors"),
     path('book-appointment/', views.book_appointmentview, name="book-appointment"),
     path('book-appointment/view-appointment/', views.view_appointmentview, name="view-appointment"),
 
